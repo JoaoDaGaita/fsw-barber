@@ -42,10 +42,10 @@ export default async function Home() {
             >
               <Image
                 src={quickSearch.imageUrl}
-                sizes=""
                 alt={quickSearch.title}
-                height={16}
+                sizes="100vw"
                 width={16}
+                height={16}
               />
               {quickSearch.title}
             </Button>

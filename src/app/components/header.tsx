@@ -7,7 +7,13 @@ export function Header() {
   return (
     <Card>
       <CardContent className="flex items-center justify-between p-5">
-        <Image alt="" src="/logo.png" height={18} width={120} />
+        <Image
+          alt=""
+          src="/logo.png"
+          style={{ width: "auto", height: "auto" }}
+          height={18}
+          width={120}
+        />
         <Button size="icon" variant="outline">
           <MenuIcon />
         </Button>
