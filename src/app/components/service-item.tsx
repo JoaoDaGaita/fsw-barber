@@ -9,7 +9,7 @@ interface ServiceItemProps {
 export function ServiceItem({ service }: ServiceItemProps) {
   return (
     <Card>
-      <CardContent className="flex items-center gap-2 p-3">
+      <CardContent className="flex items-center gap-2">
         <div className="relative min-h-[110px] min-w-[110px]">
           <Image
             src={service.imageUrl}
