@@ -10,7 +10,7 @@ interface BarbershopItemProps {
   barbershop: Barbershop;
 }
 
-export function BarberShopItem({ barbershop }: BarbershopItemProps) {
+export function BarbershopItem({ barbershop }: BarbershopItemProps) {
   return (
     <Card className="min-w-[167px] rounded-2xl">
       <CardContent className="p-0 px-1 pb-3 pt-1">
@@ -38,7 +38,7 @@ export function BarberShopItem({ barbershop }: BarbershopItemProps) {
             {barbershop.address}
           </p>
           <Button variant="secondary" className="mt-3 w-full" asChild>
-            <Link href={`/barbershop/${barbershop.id}`}>Reservar</Link>
+            <Link href={`/barbershops/${barbershop.id}`}>Reservar</Link>
           </Button>
         </div>
       </CardContent>

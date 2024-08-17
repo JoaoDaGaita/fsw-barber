@@ -3,10 +3,10 @@ import { Card, CardContent } from "./ui/card";
 import { Button } from "./ui/button";
 import { MenuIcon } from "lucide-react";
 import { Sheet, SheetTrigger } from "./ui/sheet";
+import SidebarSheet from "./sidebar-sheet";
 import Link from "next/link";
-import { SidebarSheet } from "./sidebar-sheet";
 
-export function Header() {
+const Header = () => {
   return (
     <Card>
       <CardContent className="flex flex-row items-center justify-between p-5">
@@ -25,4 +25,6 @@ export function Header() {
       </CardContent>
     </Card>
   );
-}
+};
+
+export default Header;

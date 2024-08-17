@@ -1,12 +1,12 @@
-import { SearchIcon } from "lucide-react";
-import { Header } from "./components/header";
 import { Button } from "./components/ui/button";
-import { Input } from "./components/ui/input";
 import Image from "next/image";
 import { db } from "./lib/prisma";
-import { BarberShopItem } from "./components/barber-shop-item";
+
 import { quickSearchOptions } from "./_constants/search";
 import { BookingItem } from "./components/booking-item";
+import Header from "./components/header";
+import { BarbershopItem } from "./components/barber-shop-item";
+import Search from "./components/search";
 
 export default async function Home() {
   const barberShops = await db.barbershop.findMany({});
@@ -25,11 +25,8 @@ export default async function Home() {
         <p>Quarta, 7 de agosto.</p>
 
         {/*Busca*/}
-        <div className="mt-6 flex items-center gap-2">
-          <Input placeholder="Faça sua Busca..." />
-          <Button>
-            <SearchIcon color="white" />
-          </Button>
+        <div className="mt-6">
+          <Search />
         </div>
         {/* Busca Rápida*/}
         <div className="mt-6 flex gap-3 overflow-x-scroll [&::-webkit-scrollbar]:hidden">
@@ -67,7 +64,7 @@ export default async function Home() {
         </h2>
         <div className="flex gap-4 overflow-auto overflow-x-scroll [&::-webkit-scrollbar]:hidden">
           {barberShops.map((barbershop) => (
-            <BarberShopItem key={barbershop.id} barbershop={barbershop} />
+            <BarbershopItem key={barbershop.id} barbershop={barbershop} />
           ))}
         </div>
 
@@ -76,7 +73,7 @@ export default async function Home() {
         </h2>
         <div className="flex gap-4 overflow-auto overflow-x-scroll [&::-webkit-scrollbar]:hidden">
           {popularBarbershops.map((barbershop) => (
-            <BarberShopItem key={barbershop.id} barbershop={barbershop} />
+            <BarbershopItem key={barbershop.id} barbershop={barbershop} />
           ))}
         </div>
       </div>
