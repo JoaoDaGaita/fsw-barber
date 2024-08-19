@@ -50,7 +50,7 @@ const Bookings = async () => {
   return (
     <>
       <Header />
-      <div className="p-5">
+      <div className="space-y-3 p-5">
         <h2 className="mb-3 mt-6 text-xs font-bold uppercase text-gray-400">
           Agendamentos
         </h2>
