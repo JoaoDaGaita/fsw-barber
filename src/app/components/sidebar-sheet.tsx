@@ -35,7 +35,7 @@ const SidebarSheet = () => {
           </div>
         ) : (
           <>
-            <h2 className="font-bold">Olá, faça seu login!</h2>
+            <h2 className="font-bold">{session.user}</h2>
             <Dialog>
               <DialogTrigger asChild>
                 <Button size="icon">

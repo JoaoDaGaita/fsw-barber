@@ -9,6 +9,8 @@ import { BarbershopItem } from "./components/barber-shop-item";
 import Search from "./components/search";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./lib/auth";
+import { format } from "date-fns";
+import { ptBR } from "date-fns/locale";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
@@ -45,8 +47,12 @@ export default async function Home() {
       <Header />
       <div className="p-5">
         {/* Texto*/}
-        <h2 className="text-xl font-bold">Olá, João</h2>
-        <p>Quarta, 7 de agosto.</p>
+        <h2 className="text-xl font-bold">
+          {session?.user ? session.user.name : "Bem vindo"}
+        </h2>
+        <p className="capitalize">
+          {format(new Date(), "EEEE, dd 'de' MMMM ", { locale: ptBR })}
+        </p>
 
         {/*Busca*/}
         <div className="mt-6">
