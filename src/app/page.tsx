@@ -1,3 +1,5 @@
+"use server";
+
 import { Button } from "./components/ui/button";
 import Image from "next/image";
 import { db } from "./lib/prisma";
@@ -11,6 +13,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "./lib/auth";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
+import { getConfirmedBooks } from "./_data/get-confirmed-books";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
@@ -21,26 +24,7 @@ export default async function Home() {
     },
   });
 
-  const confirmedBookings = session?.user
-    ? await db.booking.findMany({
-        where: {
-          userId: (session?.user as any).id,
-          date: {
-            gte: new Date(),
-          },
-        },
-        include: {
-          service: {
-            include: {
-              barbershop: true,
-            },
-          },
-        },
-        orderBy: {
-          date: "asc",
-        },
-      })
-    : [];
+  const confirmedBookings = await getConfirmedBooks();
 
   return (
     <>

@@ -1,52 +1,19 @@
 import { getServerSession } from "next-auth";
 import Header from "../components/header";
 import { authOptions } from "../lib/auth";
-import { db } from "../lib/prisma";
 import { notFound } from "next/navigation";
 import { BookingItem } from "../components/booking-item";
+import { getConfirmedBooks } from "../_data/get-confirmed-books";
+import { getFinishedBooks } from "../_data/get-finished-books";
 
 const Bookings = async () => {
   const session = await getServerSession(authOptions);
   if (!session?.user) {
     return notFound();
   }
-  const confirmedBookings = await db.booking.findMany({
-    where: {
-      userId: (session.user as any).id,
-      date: {
-        gte: new Date(),
-      },
-    },
-    include: {
-      service: {
-        include: {
-          barbershop: true,
-        },
-      },
-    },
-    orderBy: {
-      date: "asc",
-    },
-  });
+  const confirmedBookings = await getConfirmedBooks();
 
-  const finishedBookings = await db.booking.findMany({
-    where: {
-      userId: (session.user as any).id,
-      date: {
-        lte: new Date(),
-      },
-    },
-    include: {
-      service: {
-        include: {
-          barbershop: true,
-        },
-      },
-    },
-    orderBy: {
-      date: "asc",
-    },
-  });
+  const finishedBookings = await getFinishedBooks();
   return (
     <>
       <Header />
@@ -57,7 +24,7 @@ const Bookings = async () => {
         {confirmedBookings.length === 0 && finishedBookings.length === 0 && (
           <p className="text-gray-400">Você não possui nenhum agendamento.</p>
         )}
-        {confirmedBookings.length > 0 && (
+        {confirmedBookings && confirmedBookings.length > 0 && (
           <>
             <h2 className="mb-3 mt-6 text-xs font-bold uppercase text-gray-400">
               Confirmados
